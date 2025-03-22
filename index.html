@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>அbhi's portfolio!</title>
+  <link rel="icon" href="thala.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    /* Internal CSS */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: #333;
+    }
+
+    /* Navbar */
+    nav {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 1rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    nav ul li {
+      margin: 0 1rem;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ff9a9e;
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 2rem;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Home Section */
+    #home {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    }
+
+    #home h1 {
+      font-size: 3rem;
+      color: #fff;
+    }
+
+    #home p {
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    /* Quote Button Styling */
+.quote-btn {
+  padding: 0.8rem 2rem;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.quote-btn:hover {
+  background: #ff6b6b;
+  transform: scale(1.05);
+}
+
+/* Quote Display Styling */
+    .quote-display {
+  font-size: 1.2rem;
+  color: #000000;
+  margin-top: 1rem;
+  font-style: italic;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+    /* About Section */
+    #about {
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    }
+
+    #about .profile-pic {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      margin-bottom: 1rem;
+      object-fit: fill;
+    }
+
+    #about h2 {
+      font-size: 2.5rem;
+      color: #333;
+    }
+
+    #about p {
+      font-size: 1.2rem;
+      color: #333;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* Personal Info Section */
+    #personal-info {
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+    }
+
+    #personal-info .info-card {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: left;
+    }
+
+    #personal-info .info-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    #personal-info .info-card p {
+      font-size: 1.1rem;
+      color: #555;
+      margin: 0.5rem 0;
+    }
+
+    /* Projects Section */
+    #projects {
+      background: linear-gradient(135deg, #84fab0, #8fd3f4);
+    }
+
+    #projects h2 {
+      font-size: 2.5rem;
+      color: #333;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .project-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .project-card p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-card .shop-now-btn {
+      padding: 0.5rem 1rem;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .project-card .shop-now-btn:hover {
+      background: #ff9a9e;
+    }
+
+    /* Hire Me Section */
+    #hire {
+      background: linear-gradient(135deg, #84fab0, #8fd3f4);
+    }
+
+    #hire h2 {
+      font-size: 2.5rem;
+      color: #333;
+    }
+
+    #hire .why-hire-me {
+      font-size: 1.2rem;
+      color: #333;
+      max-width: 800px;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .skill-card {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 1.5rem;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .skill-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .progress-bar {
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 10px;
+      margin-bottom: 1rem;
+    }
+
+    .progress-bar div {
+      height: 100%;
+      background: #ff9a9e;
+      border-radius: 10px;
+    }
+
+    /* Contact Section */
+    #contact {
+      background: linear-gradient(135deg, #ff9a9e, #fbc2eb);
+    }
+
+    #contact h2 {
+      font-size: 2.5rem;
+      color: #333;
+    }
+
+    #contact .contact-info {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    #contact .contact-info a {
+      color: #333;
+      text-decoration: none;
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    #contact .contact-info a:hover {
+      color: #ff9a9e;
+    }
+
+    #contact form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #contact input, #contact textarea {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #contact button {
+      padding: 0.5rem 1rem;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #contact button:hover {
+      background: #ff9a9e;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* Download Resume Button */
+    .download-btn {
+      padding: 0.5rem 1rem;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background: #ff9a9e;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#personal-info">Personal Info</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#hire">Hire Me</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#" id="downloadResume">Download Resume</a></li>
+    </ul>
+  </nav>
+
+  <!-- Home Section -->
+<section id="home">
+    <h1>Welcome to My Portfolio</h1>
+    <p>I am a passionate developer ready to create amazing things!</p>
+    
+    <!-- Button to Generate Tamil Quotes -->
+    <button id="quoteButton" class="quote-btn">Click for a Surprsie!👀</button>
+    
+    <!-- Display Area for Quotes -->
+    <p id="quoteDisplay" class="quote-display"></p>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <img src="profileee.jpg" alt="Profile Picture" class="profile-pic"> <!-- Replace with your profile picture -->
+    <h2>About Me</h2>
+    <p>
+        Hi, I'm <b><i>Abhiii</i></b>, a passionate and dedicated computer science student with a strong interest in software development, 
+        problem-solving, and technology innovation. I am currently pursuing my degree in Computer Science at <i>Sridevi Arts & Science College,Ponneri</i>, where I have gained a solid foundation in programming languages 
+        such as Python, Java, C++, and JavaScript, as well as experience in web development, database management, and algorithms.
+    </p>
+  </section>
+
+  <!-- Personal Info Section -->
+  <section id="personal-info">
+    <div class="info-card">
+      <h3>Personal Information</h3>
+      <p><strong>Name:</strong> Abhii S</p>
+      <p><strong>Date of Birth:</strong> 06/02/2006</p>
+      <p><strong>Age:</strong> 19</p>
+      <p><strong>Address:</strong> No.69, Hawkeye St, Gotham City, NYC</p>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-card">
+      <h3>Tic-Tac-Toe</h3>
+      <p>An animated and interactive Tic-Tac-Toe game with a modern design.</p>
+      <button class="shop-now-btn" onclick="window.location.href='project.html'">Play Now</button>
+    </div>
+  </section>
+
+  <!-- Hire Me Section -->
+  <section id="hire">
+    <h2>Hire Me</h2>
+    <p class="why-hire-me">
+        As a passionate and driven computer science student, I bring a strong foundation in programming,
+         problem-solving, and innovative thinking. My expertise spans key technologies such as Python, Java, C++, HTML/CSS, JavaScript, 
+         and SQL, along with hands-on experience in web development, software engineering, and data analysis. 
+        I thrive in collaborative environments, leveraging my strong communication and teamwork skills to deliver high-quality solutions
+    </p>
+    <div class="skills-container">
+      <!-- Soft Skills -->
+      <div class="skill-card">
+        <h3>Soft Skills</h3>
+        <div class="progress-bar"><div style="width: 90%;"></div></div>
+        <p>Communication</p>
+        <div class="progress-bar"><div style="width: 85%;"></div></div>
+        <p>Teamwork</p>
+        <div class="progress-bar"><div style="width: 95%;"></div></div>
+        <p>Problem Solving</p>
+      </div>
+      <!-- Technical Skills -->
+      <div class="skill-card">
+        <h3>Technical Skills</h3>
+        <div class="progress-bar"><div style="width: 95%;"></div></div>
+        <p>HTML/CSS</p>
+        <div class="progress-bar"><div style="width: 90%;"></div></div>
+        <p>JavaScript</p>
+        <div class="progress-bar"><div style="width: 85%;"></div></div>
+        <p>React</p>
+      </div>
+      <!-- Additional Skills -->
+      <div class="skill-card">
+        <h3>Additional Skills</h3>
+        <div class="progress-bar"><div style="width: 80%;"></div></div>
+        <p>UI/UX Design</p>
+        <div class="progress-bar"><div style="width: 75%;"></div></div>
+        <p>Project Management</p>
+        <div class="progress-bar"><div style="width: 70%;"></div></div>
+        <p>DevOps</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <div class="contact-info">
+      <a href="https://github.com/abhii16377" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://wa.me/+919345657244" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="mailto:abhii16377@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 Ishowஅbhiii🎀 portfolio!. All rights reserved.</p>
+  </footer>
+
+  <!-- Internal JavaScript -->
+  <script>
+    // Smooth Scroll Effect
+    document.querySelectorAll('nav ul li a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Download Resume
+    document.getElementById('downloadResume').addEventListener('click', function(e) {
+      e.preventDefault();
+      const link = document.createElement('a');
+      link.href = 'resume.pdf'; // Replace with your resume file path
+      link.download = 'resume.pdf';
+      link.click();
+    });
+
+    // Fade In Effect on Scroll
+    const sections = document.querySelectorAll('section');
+    const options = {
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, options);
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+
+    // Contact Form Submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      alert(`Thank you, ${name}! Your message has been sent.`);
+      this.reset();
+    });
+
+
+    // Array of Tamil Quotes
+const tamilQuotes = [
+  "வாழ்க்கை என்பது ஒரு பயணம், அதை அனுபவி!",
+  "முயற்சி திருவினையாக்கும்!",
+  "chad aaga iru sad aaga irukadhey!",
+  "சிறிய தொடக்கம், பெரிய வெற்றிக்கு வழி!",
+  "நம்பிக்கை என்பது வெற்றியின் முதல் படி!",
+  "கடினமான வேலை எப்போதும் பலன் தரும்!",
+  "உன்னால் முடியும், நம்பு!",
+  "விடாமுயற்சி என்பது வெற்றியின் ரகசியம்!",
+  "ஒவ்வொரு நாளும் ஒரு புதிய தொடக்கம்!",
+  "சிரித்து வாழுங்கள், வாழ்க்கை குறுகியது!",
+  "நீங்கள் எதை நம்புகிறீர்களோ, அதுவாக மாறுங்கள்!"
+
+];
+
+// Function to Generate Random Quotes
+document.getElementById('quoteButton').addEventListener('click', () => {
+  const randomIndex = Math.floor(Math.random() * tamilQuotes.length);
+  const quote = tamilQuotes[randomIndex];
+  document.getElementById('quoteDisplay').textContent = quote;
+});
+  </script>
+</body>
+</html>
